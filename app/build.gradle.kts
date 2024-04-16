@@ -11,7 +11,21 @@ kotlin {
     sourceSets {
 
         commonMain.dependencies {
-            implementation(project(":core"))
+            implementation(libs.koin.core)
+            implementation(compose.runtime)
+            implementation(compose.foundation)
+            implementation(compose.material3)
+            implementation(compose.components.resources)
+            implementation(compose.components.uiToolingPreview)
+
+            implementation(project(":infra:launcher:launcher_impl"))
+//            implementation(project(":core"))
+        }
+
+        androidMain.dependencies {
+            implementation(compose.uiTooling)
+            implementation(libs.androidx.activityCompose)
+            implementation(libs.kotlinx.coroutines.android)
         }
 
         jvmMain.dependencies {
@@ -51,11 +65,6 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.11"
     }
-}
-dependencies {
-    implementation(compose.uiTooling)
-    implementation(libs.androidx.activityCompose)
-    implementation(libs.kotlinx.coroutines.android)
 }
 
 compose.desktop {

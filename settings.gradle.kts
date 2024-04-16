@@ -18,4 +18,8 @@ dependencyResolutionManagement {
 
 include(":app")
 
-include(":core")
+include(":infra")
+
+include(":infra:launcher")
+include(":infra:launcher:launcher_api")
+include(":infra:launcher:launcher_impl")
