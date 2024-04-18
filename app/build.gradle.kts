@@ -4,6 +4,8 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.compose)
     id("com.wulinpeng.ezreader.kotlin.multiplatform")
+    alias(libs.plugins.ksp)
+    id("com.wulinpeng.ezreader.koin")
 }
 
 kotlin {
@@ -12,11 +14,13 @@ kotlin {
 
         commonMain.dependencies {
             implementation(libs.koin.core)
+            implementation(libs.koin.annotations)
             implementation(compose.runtime)
             implementation(compose.foundation)
             implementation(compose.material3)
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
+            implementation(libs.circuit.fundation)
 
             implementation(project(":infra:launcher:launcher_impl"))
 //            implementation(project(":core"))
