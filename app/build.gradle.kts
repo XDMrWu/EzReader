@@ -2,8 +2,8 @@ import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 
 plugins {
     alias(libs.plugins.android.application)
-    alias(libs.plugins.compose)
     id("com.wulinpeng.ezreader.kotlin.multiplatform")
+    id("com.wulinpeng.ezreader.compose")
     alias(libs.plugins.ksp)
     id("com.wulinpeng.ezreader.koin")
 }
@@ -14,34 +14,26 @@ kotlin {
 
         commonMain.dependencies {
             implementation(libs.koin.core)
+            implementation(libs.koin.compose)
             implementation(libs.koin.annotations)
-            implementation(compose.runtime)
-            implementation(compose.foundation)
-            implementation(compose.material3)
-            implementation(compose.components.resources)
-            implementation(compose.components.uiToolingPreview)
-            implementation(libs.circuit.fundation)
+            implementation(libs.voyager.navigator)
 
-            implementation(project(":infra:launcher:launcher_impl"))
-//            implementation(project(":core"))
+            implementation(project(":infra:appcontext"))
+            implementation(project(":infra:launcher:launcher-impl"))
+            implementation(project(":business:homepage:homepage-impl"))
+            implementation(project(":business:book-shelf:book-shelf-impl"))
+            implementation(project(":business:discovery:discovery-impl"))
+            implementation(project(":business:category:category-impl"))
+            implementation(project(":business:profile:profile-impl"))
         }
 
         androidMain.dependencies {
-            implementation(compose.uiTooling)
-            implementation(libs.androidx.activityCompose)
             implementation(libs.kotlinx.coroutines.android)
         }
 
         jvmMain.dependencies {
-            implementation(compose.desktop.currentOs)
             implementation(libs.kotlinx.coroutines.swing)
             implementation(libs.ktor.client.okhttp)
-        }
-
-        iosMain.dependencies {
-            implementation(compose.runtime)
-            implementation(compose.foundation)
-            implementation(compose.material3)
         }
     }
 }

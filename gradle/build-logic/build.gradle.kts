@@ -19,5 +19,9 @@ gradlePlugin {
             id = "com.wulinpeng.ezreader.koin"
             implementationClass = "com.wulinpeng.ezreader.KoinPlugin"
         }
+        register("ComposePlugin") {
+            id = "com.wulinpeng.ezreader.compose"
+            implementationClass = "com.wulinpeng.ezreader.ComposePlugin"
+        }
     }
 }
