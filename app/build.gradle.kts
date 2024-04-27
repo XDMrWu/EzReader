@@ -19,6 +19,7 @@ kotlin {
             implementation(libs.voyager.navigator)
 
             implementation(project(":infra:appcontext"))
+            implementation(project(":infra:network"))
             implementation(project(":infra:launcher:launcher-impl"))
             implementation(project(":business:homepage:homepage-impl"))
             implementation(project(":business:book-shelf:book-shelf-impl"))

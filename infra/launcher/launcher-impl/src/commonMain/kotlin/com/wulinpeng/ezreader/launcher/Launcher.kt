@@ -16,8 +16,7 @@ import org.koin.core.component.inject
  */
 object Launcher: KoinComponent {
 
-    // TODO: 没有 Task 注入时通过 get 获取会崩溃
-    private val tasks = runCatching { get<List<ILauncherTask>>() }.getOrElse { emptyList() }
+    private val tasks = getKoin().getAll<ILauncherTask>()
     private val coroutineScope = CoroutineScope(SupervisorJob())
 
     fun launch() {

@@ -24,6 +24,8 @@ include(":infra:launcher:launcher-api")
 include(":infra:launcher:launcher-impl")
 include(":infra:appcontext")
 include(":infra:common-resources")
+include(":infra:network")
+include(":infra:architecture")
 
 include(":business")
 include(":business:homepage")

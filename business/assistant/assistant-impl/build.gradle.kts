@@ -17,9 +17,13 @@ kotlin {
             implementation(libs.voyager.navigator)
             implementation(libs.voyager.tabNavigator)
             implementation(libs.voyager.bottomSheetNavigator)
+            implementation(libs.voyager.screenModel)
             implementation(libs.composeIcons.feather)
             implementation(project(":infra:common-resources"))
             implementation(project(":business:homepage:homepage-api"))
+            implementation(project(":infra:network"))
+            implementation(project(":infra:appcontext"))
+            implementation(project(":infra:architecture"))
         }
     }
 }

@@ -20,8 +20,7 @@ class ComposePlugin: Plugin<Project> {
                 implementation(composeDependencies.runtime)
                 implementation(composeDependencies.foundation)
                 implementation(composeDependencies.material3)
-                implementation(composeDependencies.material)
-                implementation(composeDependencies.components.resources)
+//                implementation(composeDependencies.components.resources)
                 implementation(composeDependencies.components.uiToolingPreview)
             }
             sourceSets.androidMain.dependencies {
@@ -31,6 +30,11 @@ class ComposePlugin: Plugin<Project> {
 
             sourceSets.jvmMain.dependencies {
                 implementation(composeDependencies.desktop.currentOs)
+            }
+
+            sourceSets.iosMain.dependencies {
+                // iOS没有这个依赖编译不过，很奇怪
+                implementation(composeDependencies.material)
             }
         }
 

@@ -1,12 +1,14 @@
 package com.wulinpeng.ezreader.assistant.tab
 
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
+import cafe.adriel.voyager.core.model.rememberScreenModel
 import cafe.adriel.voyager.core.screen.ScreenKey
 import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.navigator.tab.TabOptions
+import com.wulinpeng.ezreader.assistant.ui.AssistantScreen
+import com.wulinpeng.ezreader.assistant.ui.AssistantVM
 import com.wulinpeng.ezreader.homepage.screen.IHomePageTab
 import compose.icons.FeatherIcons
 import compose.icons.feathericons.Grid
@@ -20,16 +22,17 @@ import org.koin.core.annotation.Factory
  */
 @Factory
 class AssistantTab: IHomePageTab {
-    override val index: Int =2
+    override val index: Int = 2
 
     override fun getVoyagerTab(): Tab {
         return object : Tab {
 
-            override val key: ScreenKey = "CategoryTab"
+            override val key: ScreenKey = "AssistantTab"
 
             @Composable
             override fun Content() {
-                Text("AI 助手")
+                val vm = rememberScreenModel { AssistantVM() }
+                AssistantScreen(vm)
             }
 
             override val options: TabOptions
