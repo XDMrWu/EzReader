@@ -8,5 +8,7 @@ import cafe.adriel.voyager.navigator.tab.Tab
  * @Description:
  */
 interface IHomePageTab {
+
+    val index: Int
     fun getVoyagerTab(): Tab
 }

@@ -6,6 +6,7 @@ import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
+import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -27,14 +28,14 @@ object HomePageScreen: Screen {
     @Composable
     override fun Content() {
         val koin = getKoin()
-        val tabs = remember { koin.getAll<IHomePageTab>().map { it.getVoyagerTab()} }
+        val tabs = remember { koin.getAll<IHomePageTab>().sortedBy { it.index }.map { it.getVoyagerTab()} }
         TabNavigator(tabs.first()) {
             Scaffold(
                 content = {
                     CurrentTab()
                 },
                 bottomBar = {
-                    BottomNavigation {
+                    NavigationBar {
                         tabs.forEach {
                             TabNavigationItem(it)
                         }

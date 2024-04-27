@@ -19,6 +19,8 @@ import org.koin.core.annotation.Factory
  */
 @Factory
 class ProfileTab: IHomePageTab {
+    override val index: Int = 3
+
     override fun getVoyagerTab(): Tab {
         return object : Tab {
 
@@ -35,7 +37,7 @@ class ProfileTab: IHomePageTab {
                     val painter = rememberVectorPainter(FeatherIcons.User)
                     return remember {
                         TabOptions(
-                            index = 3u,
+                            index = index.toUShort(),
                             title = "我的",
                             icon = painter
                         )

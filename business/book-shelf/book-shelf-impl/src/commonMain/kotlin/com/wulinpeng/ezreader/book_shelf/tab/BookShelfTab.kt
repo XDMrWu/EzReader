@@ -19,6 +19,8 @@ import org.koin.core.annotation.Factory
  */
 @Factory
 class BookShelfTab: IHomePageTab {
+    override val index: Int = 0
+
     override fun getVoyagerTab(): Tab {
         return object : Tab {
 
@@ -35,7 +37,7 @@ class BookShelfTab: IHomePageTab {
                     val painter = rememberVectorPainter(FeatherIcons.Book)
                     return remember {
                         TabOptions(
-                            index = 0u,
+                            index = index.toUShort(),
                             title = "书架",
                             icon = painter
                         )

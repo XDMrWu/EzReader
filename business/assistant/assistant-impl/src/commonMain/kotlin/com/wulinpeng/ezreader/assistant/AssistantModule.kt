@@ -1,4 +1,4 @@
-package com.wulinpeng.ezreader.category
+package com.wulinpeng.ezreader.assistant
 
 import org.koin.core.annotation.ComponentScan
 import org.koin.core.annotation.Module
@@ -9,5 +9,5 @@ import org.koin.core.annotation.Module
  * @Description:
  */
 @Module
-@ComponentScan("com.wulinpeng.ezreader.category")
-class CategoryModule
+@ComponentScan("com.wulinpeng.ezreader.assistant")
+class AssistantModule

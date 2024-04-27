@@ -9,10 +9,12 @@ import org.koin.compose.KoinContext
 
 @Composable
 fun App() {
-    KoinContext {
-        Navigator(HomePageScreen) { navigator ->
-            CompositionLocalProvider(LocalRootNavigator provides navigator) {
-                CurrentScreen()
+    AppTheme {
+        KoinContext {
+            Navigator(HomePageScreen) { navigator ->
+                CompositionLocalProvider(LocalRootNavigator provides navigator) {
+                    CurrentScreen()
+                }
             }
         }
     }

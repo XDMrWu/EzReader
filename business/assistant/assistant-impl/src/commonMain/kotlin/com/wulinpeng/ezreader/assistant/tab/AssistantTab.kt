@@ -1,4 +1,4 @@
-package com.wulinpeng.ezreader.category.tab
+package com.wulinpeng.ezreader.assistant.tab
 
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -10,6 +10,7 @@ import cafe.adriel.voyager.navigator.tab.TabOptions
 import com.wulinpeng.ezreader.homepage.screen.IHomePageTab
 import compose.icons.FeatherIcons
 import compose.icons.feathericons.Grid
+import compose.icons.feathericons.Star
 import org.koin.core.annotation.Factory
 
 /**
@@ -18,7 +19,9 @@ import org.koin.core.annotation.Factory
  * @Description:
  */
 @Factory
-class CategoryTab: IHomePageTab {
+class AssistantTab: IHomePageTab {
+    override val index: Int =2
+
     override fun getVoyagerTab(): Tab {
         return object : Tab {
 
@@ -26,17 +29,17 @@ class CategoryTab: IHomePageTab {
 
             @Composable
             override fun Content() {
-                Text("分类")
+                Text("AI 助手")
             }
 
             override val options: TabOptions
                 @Composable
                 get() {
-                    val painter = rememberVectorPainter(FeatherIcons.Grid)
+                    val painter = rememberVectorPainter(FeatherIcons.Star)
                     return remember {
                         TabOptions(
-                            index = 2u,
-                            title = "分类",
+                            index = index.toUShort(),
+                            title = "AI 助手",
                             icon = painter
                         )
                     }

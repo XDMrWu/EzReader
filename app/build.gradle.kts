@@ -23,7 +23,7 @@ kotlin {
             implementation(project(":business:homepage:homepage-impl"))
             implementation(project(":business:book-shelf:book-shelf-impl"))
             implementation(project(":business:discovery:discovery-impl"))
-            implementation(project(":business:category:category-impl"))
+            implementation(project(":business:assistant:assistant-impl"))
             implementation(project(":business:profile:profile-impl"))
         }
 
