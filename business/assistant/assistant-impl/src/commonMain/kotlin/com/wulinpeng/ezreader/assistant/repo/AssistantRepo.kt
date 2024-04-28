@@ -16,9 +16,11 @@ import kotlinx.serialization.json.jsonPrimitive
  */
 class AssistantRepo {
 
+    val debug = true
+
     fun getAnswer(question: String): Flow<String> {
         return NetworkManager.httpClient
-            .readSse("http://${CommonConfig.ezreader_host}/ezreader/chatBot", params = mapOf("query" to question))
+            .readSse("http://${CommonConfig.ezreader_host}/ezreader/chatBot", params = mapOf("query" to question, "fake" to debug))
             .map {
                 runCatching {
                     defaultJson.decodeFromString<JsonObject>(it.data).get("content")!!.jsonPrimitive.content
