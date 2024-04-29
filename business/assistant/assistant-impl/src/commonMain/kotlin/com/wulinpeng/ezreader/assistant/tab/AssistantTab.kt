@@ -8,10 +8,9 @@ import cafe.adriel.voyager.core.screen.ScreenKey
 import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.navigator.tab.TabOptions
 import com.wulinpeng.ezreader.assistant.ui.AssistantScreen
-import com.wulinpeng.ezreader.assistant.ui.AssistantVM
+import com.wulinpeng.ezreader.assistant.vm.AssistantVM
 import com.wulinpeng.ezreader.homepage.screen.IHomePageTab
 import compose.icons.FeatherIcons
-import compose.icons.feathericons.Grid
 import compose.icons.feathericons.Star
 import org.koin.core.annotation.Factory
 

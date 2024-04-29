@@ -19,12 +19,17 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.text.TextRange
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.max
@@ -39,20 +44,22 @@ import compose.icons.feathericons.Send
  * @Description:
  */
 @Composable
-fun InputComponent(enable: Boolean, content: String, onValueChange: (String) -> Unit, onSend: (String) -> Unit) {
+fun InputComponent(enable: Boolean, content: String, selection: TextRange, focusRequester: FocusRequester, onValueChange: (TextFieldValue) -> Unit, onSend: (String) -> Unit) {
     val bottomBarHeight = LocalBottomBarHeight.current
     val bottom = with(LocalDensity.current) {
         max(WindowInsets.ime.getBottom(LocalDensity.current).toDp() - bottomBarHeight, 0.dp)
     }
     // 输入框
     Row(Modifier.fillMaxWidth().padding(bottom = bottom).wrapContentHeight()) {
+        val textFieldValue = TextFieldValue(content, selection)
         TextField(
-            content,
+            textFieldValue,
             onValueChange,
             Modifier.wrapContentHeight()
                 .weight(1f)
                 .align(Alignment.CenterVertically)
-                .padding(5.dp),
+                .padding(5.dp)
+                .focusRequester(focusRequester),
             maxLines = 10,
             shape = RoundedCornerShape(30.dp),
             colors = TextFieldDefaults.colors(
@@ -62,9 +69,11 @@ fun InputComponent(enable: Boolean, content: String, onValueChange: (String) -> 
         Icon(
             rememberVectorPainter(FeatherIcons.Send),
             contentDescription = null,
-            Modifier.align(Alignment.CenterVertically).clickable(enable) {
+            Modifier.align(Alignment.CenterVertically)
+                .padding(PaddingValues(end = 8.dp))
+                .clickable(enable) {
                 onSend(content)
-            }.padding(PaddingValues(end = 8.dp))
+            }
         )
     }
 }
