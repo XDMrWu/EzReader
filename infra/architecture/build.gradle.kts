@@ -11,7 +11,7 @@ kotlin {
             implementation(libs.koin.core)
             implementation(libs.kotlinx.coroutines.core)
             implementation(libs.voyager.navigator)
-            implementation(libs.voyager.screenModel)
+            api(libs.voyager.screenModel)
         }
     }
 }

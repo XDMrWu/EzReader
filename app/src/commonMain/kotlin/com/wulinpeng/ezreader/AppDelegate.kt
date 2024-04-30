@@ -1,6 +1,7 @@
 package com.wulinpeng.ezreader.com.wulinpeng.ezreader
 
 import com.wulinpeng.ezreader.AppModule
+import com.wulinpeng.ezreader.launcher.EzPlatformContext
 import com.wulinpeng.ezreader.launcher.Launcher
 import org.koin.core.context.startKoin
 import org.koin.ksp.generated.module
@@ -9,9 +10,9 @@ import org.koin.ksp.generated.module
  * 三端 Application 生命周期统一代理
  */
 object AppDelegate {
-    fun onCreate() {
+    fun onCreate(context: EzPlatformContext) {
         initKoin()
-        startLauncher()
+        startLauncher(context)
     }
 
     /**
@@ -26,7 +27,8 @@ object AppDelegate {
     /**
      * 启动 Launcher
      */
-    private fun startLauncher() {
-        Launcher.launch()
+    private fun startLauncher(context: EzPlatformContext) {
+        Launcher.launch(context)
     }
+
 }

@@ -19,15 +19,15 @@ object Launcher: KoinComponent {
     private val tasks = getKoin().getAll<ILauncherTask>()
     private val coroutineScope = CoroutineScope(SupervisorJob())
 
-    fun launch() {
+    fun launch(context: EzPlatformContext) {
         tasks.sortedByDescending { it.priority() }.forEach {
             when (it.type()) {
-                ILauncherTaskType.MAIN -> it.doTask()
+                ILauncherTaskType.MAIN -> it.doTask(context)
                 ILauncherTaskType.IO -> coroutineScope.launch(Dispatchers.IO) {
-                    it.doTask()
+                    it.doTask(context)
                 }
                 ILauncherTaskType.WORKER -> coroutineScope.launch(Dispatchers.Default) {
-                    it.doTask()
+                    it.doTask(context)
                 }
             }
         }

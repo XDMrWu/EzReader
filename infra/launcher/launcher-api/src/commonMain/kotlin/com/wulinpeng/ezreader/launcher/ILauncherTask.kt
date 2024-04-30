@@ -10,9 +10,11 @@ enum class ILauncherTaskType {
     MAIN, IO, WORKER
 }
 
+expect class EzPlatformContext
+
 interface ILauncherTask {
     fun type(): ILauncherTaskType
-    fun doTask()
+    fun doTask(context: EzPlatformContext)
 
     fun priority(): Int = 0
 }

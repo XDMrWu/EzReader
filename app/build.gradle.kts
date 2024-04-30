@@ -20,12 +20,14 @@ kotlin {
 
             implementation(project(":infra:appcontext"))
             implementation(project(":infra:network"))
+            implementation(project(":infra:storage"))
             implementation(project(":infra:launcher:launcher-impl"))
             implementation(project(":business:homepage:homepage-impl"))
             implementation(project(":business:book-shelf:book-shelf-impl"))
             implementation(project(":business:discovery:discovery-impl"))
             implementation(project(":business:assistant:assistant-impl"))
             implementation(project(":business:profile:profile-impl"))
+            implementation(project(":business:search:search-impl"))
         }
 
         androidMain.dependencies {

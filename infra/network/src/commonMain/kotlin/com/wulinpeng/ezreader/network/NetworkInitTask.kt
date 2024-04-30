@@ -1,5 +1,6 @@
 package com.wulinpeng.ezreader.network
 
+import com.wulinpeng.ezreader.launcher.EzPlatformContext
 import com.wulinpeng.ezreader.launcher.ILauncherTask
 import com.wulinpeng.ezreader.launcher.ILauncherTaskType
 import org.koin.core.annotation.Single
@@ -13,7 +14,7 @@ import org.koin.core.annotation.Single
 class NetworkInitTask: ILauncherTask {
     override fun type(): ILauncherTaskType = ILauncherTaskType.MAIN
 
-    override fun doTask() {
+    override fun doTask(context: EzPlatformContext) {
         NetworkManager.init()
     }
 }

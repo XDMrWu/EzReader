@@ -6,6 +6,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import com.wulinpeng.ezreader.com.wulinpeng.ezreader.AppDelegate
+import com.wulinpeng.ezreader.launcher.EzPlatformContext
 
 class AndroidApp : Application() {
     companion object {
@@ -15,7 +16,7 @@ class AndroidApp : Application() {
     override fun onCreate() {
         super.onCreate()
         INSTANCE = this
-        AppDelegate.onCreate()
+        AppDelegate.onCreate(EzPlatformContext(this))
     }
 }
 

@@ -19,7 +19,9 @@ kotlin {
             implementation(libs.voyager.bottomSheetNavigator)
             implementation(libs.composeIcons.feather)
             implementation(project(":infra:common-resources"))
+            implementation(project(":infra:appcontext"))
             implementation(project(":business:homepage:homepage-api"))
+            implementation(project(":business:search:search-api"))
         }
     }
 }

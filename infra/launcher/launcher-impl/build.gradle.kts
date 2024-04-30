@@ -9,7 +9,7 @@ kotlin {
         commonMain.dependencies {
             implementation(libs.koin.core)
             implementation(libs.kotlinx.coroutines.core)
-            implementation(project(":infra:launcher:launcher-api"))
+            api(project(":infra:launcher:launcher-api"))
         }
     }
 }
