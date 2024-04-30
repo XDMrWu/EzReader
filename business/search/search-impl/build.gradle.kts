@@ -18,6 +18,8 @@ kotlin {
             implementation(libs.voyager.tabNavigator)
             implementation(libs.voyager.bottomSheetNavigator)
             implementation(libs.composeIcons.feather)
+            implementation(libs.coil.compose)
+            implementation(libs.coil.ktor)
             implementation(project(":infra:storage"))
             implementation(project(":infra:common-resources"))
             implementation(project(":infra:network"))

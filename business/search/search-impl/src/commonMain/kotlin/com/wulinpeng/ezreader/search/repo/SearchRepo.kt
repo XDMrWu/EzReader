@@ -65,6 +65,9 @@ class SearchRepo: KoinComponent {
             (it?.toMutableList() ?: mutableListOf()).apply {
                 if (!contains(content)) {
                     add(0, content)
+                } else {
+                    remove(content)
+                    add(0, content)
                 }
             }
         }
