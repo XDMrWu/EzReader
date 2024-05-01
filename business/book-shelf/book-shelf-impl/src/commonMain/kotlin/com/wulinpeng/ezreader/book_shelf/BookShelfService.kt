@@ -27,4 +27,8 @@ class BookShelfService: IBookShelfService, KoinComponent {
     override suspend fun removeFromShelf(bookId: String) {
         bookShelfRepo.removeFromShelf(bookId)
     }
+
+    override suspend fun recordRead(bookId: String, chapterIndex: Int, time: Long) {
+        TODO("Not yet implemented")
+    }
 }

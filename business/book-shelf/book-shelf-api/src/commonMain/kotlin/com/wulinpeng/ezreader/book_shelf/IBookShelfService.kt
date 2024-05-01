@@ -22,4 +22,9 @@ interface IBookShelfService {
      * 移除书籍
      */
     suspend fun removeFromShelf(bookId: String)
+
+    /**
+     * 阅读记录
+     */
+    suspend fun recordRead(bookId: String, chapterIndex: Int, time: Long)
 }
