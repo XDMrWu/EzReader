@@ -1,6 +1,7 @@
 package com.wulinpeng.ezreader
 
 import com.wulinpeng.ezreader.assistant.AssistantModule
+import com.wulinpeng.ezreader.book_detail.BookDetailModule
 import com.wulinpeng.ezreader.book_shelf.BookShelfModule
 import com.wulinpeng.ezreader.discovery.DiscoveryModule
 import com.wulinpeng.ezreader.homepage.HomePageModule
@@ -25,7 +26,8 @@ import org.koin.core.annotation.Module
     ProfileModule::class,
     SearchModule::class,
     NetworkModule::class,
-    StorageModule::class
+    StorageModule::class,
+    BookDetailModule::class
 ])
 @ComponentScan("com.wulinpeng.ezreader")
 class AppModule

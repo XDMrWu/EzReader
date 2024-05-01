@@ -28,6 +28,7 @@ kotlin {
             implementation(project(":business:assistant:assistant-impl"))
             implementation(project(":business:profile:profile-impl"))
             implementation(project(":business:search:search-impl"))
+            implementation(project(":business:book-detail:book-detail-impl"))
         }
 
         androidMain.dependencies {

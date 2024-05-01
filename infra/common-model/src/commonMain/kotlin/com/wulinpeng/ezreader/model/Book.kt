@@ -16,4 +16,4 @@ data class Book(
 )
 
 @Serializable
-data class Chapter(val title: String, val url: String, val source: String)
+data class Chapter(val chapterId: String, val title: String)

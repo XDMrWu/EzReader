@@ -26,8 +26,8 @@ kotlin {
             implementation(project(":infra:architecture"))
             implementation(project(":infra:appcontext"))
             implementation(project(":infra:common-model"))
-            implementation(project(":business:search:search-api"))
             implementation(project(":business:book-detail:book-detail-api"))
+            implementation(project(":business:book-shelf:book-shelf-api"))
         }
     }
 }

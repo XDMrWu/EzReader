@@ -22,6 +22,7 @@ kotlin {
             implementation(project(":infra:appcontext"))
             implementation(project(":business:homepage:homepage-api"))
             implementation(project(":business:search:search-api"))
+            implementation(project(":business:book-shelf:book-shelf-api"))
         }
     }
 }
