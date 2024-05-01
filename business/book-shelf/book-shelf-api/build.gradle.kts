@@ -8,5 +8,6 @@ plugins {
 kotlin {
     sourceSets.commonMain.dependencies {
         implementation(libs.voyager.tabNavigator)
+        implementation(project(":infra:common-model"))
     }
 }

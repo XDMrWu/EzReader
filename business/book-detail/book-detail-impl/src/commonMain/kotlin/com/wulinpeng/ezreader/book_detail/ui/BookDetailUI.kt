@@ -75,7 +75,7 @@ fun BookDetailUI(vm: BookDetailVM, book: Book, hasAddToShelf: Boolean) {
                 }
             }
         }
-        BottomBar(vm, book.bookId, hasAddToShelf)
+        BottomBar(vm, book, hasAddToShelf)
     }
 }
 
@@ -102,7 +102,7 @@ private fun TopBar(navController: Navigator) {
     }
 }
 @Composable
-fun BottomBar(vm: BookDetailVM, bookId: String, hasAddToShelf: Boolean) {
+fun BottomBar(vm: BookDetailVM, book: Book, hasAddToShelf: Boolean) {
 
     @Composable
     fun CustomButton(text: String, color: Color, onClick: () -> Unit) {
@@ -120,11 +120,11 @@ fun BottomBar(vm: BookDetailVM, bookId: String, hasAddToShelf: Boolean) {
         Box(Modifier.weight(1f), contentAlignment = Alignment.Center) {
             if (hasAddToShelf) {
                 CustomButton("移除书架", Color(231, 122, 57)) {
-                    vm.removeFromShelf(bookId)
+                    vm.removeFromShelf(book.bookId)
                 }
             } else {
                 CustomButton("加入书架", Color(241, 244, 252)) {
-                    vm.addToShelf(bookId)
+                    vm.addToShelf(book)
                 }
             }
         }

@@ -37,15 +37,19 @@ class BookDetailVM: EzViewModel() {
         }
     }
 
-    fun addToShelf(bookId: String) {
-        get<IBookShelfService>().addToShelf(bookId)
+    fun addToShelf(book: Book) {
+        launch {
+            get<IBookShelfService>().addToShelf(book)
+        }
         if (uiState.value is EzResult.Success) {
             uiState.value = (uiState.value as EzResult.Success).data.copy(hasAddToShelf = true).let { EzResult.Success(it) }
         }
     }
 
     fun removeFromShelf(bookId: String) {
-        get<IBookShelfService>().removeFromShelf(bookId)
+        launch {
+            get<IBookShelfService>().removeFromShelf(bookId)
+        }
         if (uiState.value is EzResult.Success) {
             uiState.value = (uiState.value as EzResult.Success).data.copy(hasAddToShelf = false).let { EzResult.Success(it) }
         }

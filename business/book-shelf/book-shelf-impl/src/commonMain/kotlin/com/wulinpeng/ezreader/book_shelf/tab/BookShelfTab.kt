@@ -6,6 +6,7 @@ import androidx.compose.animation.core.animateIntAsState
 import androidx.compose.animation.core.animateIntSizeAsState
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -15,24 +16,29 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
-import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.pager.HorizontalPager
-import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.pager.rememberPagerState
-import androidx.compose.material3.Button
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
-import androidx.compose.material3.Tab
-import androidx.compose.material3.TabRow
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
+import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.layout.positionInRoot
+import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.window.Popup
+import androidx.compose.ui.window.PopupProperties
 import cafe.adriel.voyager.core.model.rememberScreenModel
 import cafe.adriel.voyager.core.screen.ScreenKey
 import cafe.adriel.voyager.navigator.tab.Tab
@@ -41,11 +47,14 @@ import com.wulinpeng.ezreader.appcontext.navigator.LocalRootNavigator
 import com.wulinpeng.ezreader.book_shelf.ui.BookHistoryScreen
 import com.wulinpeng.ezreader.book_shelf.ui.BookShelfScreen
 import com.wulinpeng.ezreader.book_shelf.vm.BookHistoryVM
+import com.wulinpeng.ezreader.book_shelf.vm.BookShelfMode
 import com.wulinpeng.ezreader.book_shelf.vm.BookShelfVM
 import com.wulinpeng.ezreader.homepage.screen.IHomePageTab
 import com.wulinpeng.ezreader.search.screen.ISearchScreen
 import compose.icons.FeatherIcons
 import compose.icons.feathericons.Book
+import compose.icons.feathericons.Grid
+import compose.icons.feathericons.List
 import compose.icons.feathericons.MoreHorizontal
 import compose.icons.feathericons.Search
 import kotlinx.coroutines.launch
@@ -75,6 +84,8 @@ class BookShelfTab: IHomePageTab {
                 val localRootNavigator = LocalRootNavigator.current
                 val bookShelfVM = rememberScreenModel { BookShelfVM() }
                 val bookHistoryVM = rememberScreenModel { BookHistoryVM() }
+                var showPopUp by remember { mutableStateOf(false) }
+                var popUpOffset by remember { mutableStateOf(IntOffset(0, 0)) }
                 Column(Modifier.fillMaxSize()) {
                     Row(Modifier.fillMaxWidth().wrapContentHeight()
                         .background(Color(241, 244, 252))
@@ -104,7 +115,9 @@ class BookShelfTab: IHomePageTab {
                             rememberVectorPainter(FeatherIcons.MoreHorizontal),
                             contentDescription = null,
                             Modifier.clickable {
-                                // TODO: 弹出更多菜单
+                                showPopUp = true
+                            }.onGloballyPositioned {
+                                popUpOffset = IntOffset(it.positionInRoot().x.toInt(), it.positionInRoot().y.toInt() + it.size.height)
                             }.padding(10.dp)
                         )
                     }
@@ -115,6 +128,37 @@ class BookShelfTab: IHomePageTab {
                             }
                             1 -> {
                                 BookHistoryScreen(bookHistoryVM)
+                            }
+                        }
+                    }
+                }
+                if (showPopUp) {
+                    Popup(offset = popUpOffset, properties = PopupProperties(focusable = true), onDismissRequest = {showPopUp = false }) {
+                        Column(Modifier.background(Color.White)
+                            .border(1.dp, Color.Gray, RoundedCornerShape(5.dp))
+                            .padding(5.dp)
+                        ) {
+                            Row(Modifier.clickable {
+                                bookShelfVM.changeMode(BookShelfMode.List)
+                                showPopUp = false
+                            }.padding(0.dp, 5.dp)) {
+                                Icon(
+                                    rememberVectorPainter(FeatherIcons.List),
+                                    contentDescription = null,
+                                    Modifier.padding(end = 5.dp).align(Alignment.CenterVertically)
+                                )
+                                Text("列表模式", Modifier.align(Alignment.CenterVertically))
+                            }
+                            Row(Modifier.clickable {
+                                bookShelfVM.changeMode(BookShelfMode.Grid)
+                                showPopUp = false
+                            }.padding(0.dp, 5.dp)) {
+                                Icon(
+                                    rememberVectorPainter(FeatherIcons.Grid),
+                                    contentDescription = null,
+                                    Modifier.padding(end = 5.dp).align(Alignment.CenterVertically)
+                                )
+                                Text("宫格模式", Modifier.align(Alignment.CenterVertically))
                             }
                         }
                     }

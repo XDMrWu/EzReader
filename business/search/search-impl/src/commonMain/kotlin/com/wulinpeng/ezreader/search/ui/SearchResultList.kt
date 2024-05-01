@@ -1,5 +1,6 @@
 package com.wulinpeng.ezreader.search.ui
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -21,8 +22,12 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
+import com.wulinpeng.ezreader.appcontext.navigator.LocalRootNavigator
+import com.wulinpeng.ezreader.book_detail.screen.IBookDetailScreen
 import com.wulinpeng.ezreader.model.Book
 import com.wulinpeng.ezreader.model.EzResult
+import org.koin.compose.koinInject
+import org.koin.core.parameter.parametersOf
 
 /**
  * @Author: wulinpeng
@@ -31,6 +36,7 @@ import com.wulinpeng.ezreader.model.EzResult
  */
 @Composable
 fun SearchResultList(searchResult: EzResult<List<Book>>, modifier: Modifier) {
+    val localNavigator = LocalRootNavigator.current
     when (searchResult) {
         is EzResult.Error -> Text("Error")
         is EzResult.Loading -> {
@@ -44,7 +50,12 @@ fun SearchResultList(searchResult: EzResult<List<Book>>, modifier: Modifier) {
 //                    BookItem(it)
 //                }
                 searchResult.data.forEach {
-                    BookItem(it)
+                    val detailScreen = koinInject<IBookDetailScreen> {
+                        parametersOf(it.bookId)
+                    }
+                    BookItem(it) {
+                        localNavigator.push(detailScreen)
+                    }
                 }
             }
         }
@@ -53,8 +64,10 @@ fun SearchResultList(searchResult: EzResult<List<Book>>, modifier: Modifier) {
 }
 
 @Composable
-fun BookItem(book: Book) {
-    Row(Modifier.fillMaxWidth().height(100.dp).padding(10.dp, 5.dp)) {
+fun BookItem(book: Book, onClick: () -> Unit = {}) {
+    Row(Modifier.fillMaxWidth().height(100.dp).clickable {
+        onClick()
+    }.padding(10.dp, 5.dp)) {
         AsyncImage(model = book.image, contentDescription = null, modifier = Modifier.width(50.dp).height(80.dp))
         Column(Modifier.fillMaxHeight().padding(10.dp, 5.dp)) {
             Row {

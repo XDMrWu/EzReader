@@ -1,6 +1,10 @@
 package com.wulinpeng.ezreader.book_shelf
 
+import com.wulinpeng.ezreader.book_shelf.repo.BookShelfRepo
+import com.wulinpeng.ezreader.model.Book
 import org.koin.core.annotation.Single
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 
 /**
  * @Author: wulinpeng
@@ -8,14 +12,19 @@ import org.koin.core.annotation.Single
  * @Description:
  */
 @Single
-class BookShelfService: IBookShelfService {
-    override fun hasAddToShelf(bookId: String): Boolean {
-        return false
+class BookShelfService: IBookShelfService, KoinComponent {
+
+    private val bookShelfRepo by inject<BookShelfRepo>()
+
+    override suspend fun hasAddToShelf(bookId: String): Boolean {
+        return bookShelfRepo.hasAddToShelf(bookId)
     }
 
-    override fun addToShelf(bookId: String) {
+    override suspend fun addToShelf(book: Book) {
+        bookShelfRepo.addToShelf(book)
     }
 
-    override fun removeFromShelf(bookId: String) {
+    override suspend fun removeFromShelf(bookId: String) {
+        bookShelfRepo.removeFromShelf(bookId)
     }
 }
